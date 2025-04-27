@@ -1,6 +1,4 @@
 # Rough docker containers for project elements
-version: '3.9'
-
 services:
   db:
     image: postgres
@@ -8,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: yourdbname
+      POSTGRES_DB: patientdb
     ports:
       - "5432:5432"
 
@@ -22,7 +20,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/yourdbname
+      DATABASE_URL: postgres://postgres:postgres@db:5432/patientdb
 
   frontend:
     build: ./frontend
