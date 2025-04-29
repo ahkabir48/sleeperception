@@ -2,6 +2,7 @@ import React from 'react';
 import './PatientCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 interface PatientCardProps {
     name: string;
@@ -11,6 +12,19 @@ interface PatientCardProps {
 }
 
 const PatientCard: React.FC<PatientCardProps> = ({ name, patientId, roomNumber, status }) => {
+    const navigate = useNavigate();
+
+    const handlePatientClick = (patientId: string) => {
+        navigate(`/patient/${patientId}`, {
+            state: {
+                name: name,
+                patientId: patientId,
+                roomNumber: roomNumber,
+                status: status
+            }
+        });
+    };
+
     const getStatusIndicator = () => {
         switch (status) {
             case 'urgent':
@@ -25,7 +39,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ name, patientId, roomNumber, 
     };
 
     return (
-        <div className="patient-card">
+        <div className="patient-card" onClick={() => handlePatientClick(patientId)}>
             <div className="patient-info">
                 <h3 className="patient-name">{name}</h3>
                 <div className="patient-details">

@@ -4,8 +4,16 @@ import NotificationCard from './NotificationCard';
 
 const NotificationPanel = () => {
     const [notifications, setNotifications] = useState([
-        { id: 1, title: 'New Patient Admitted', patientId: '12345', time: '2 hours ago' },
-        // Add more notifications as needed
+        { 
+            id: 1, 
+            title: 'New Patient Admitted', 
+            patientId: '12345',
+            patientName: 'John Doe',
+            patientRoom: '101',
+            patientStatus: 'stable',
+            time: '2 hours ago' 
+        },
+        // Add more notifications with the same structure
     ]);
 
     const handleCloseNotification = (id: number) => {
@@ -26,9 +34,11 @@ const NotificationPanel = () => {
                         key={notification.id}
                         title={notification.title}
                         patientId={notification.patientId}
+                        patientName={notification.patientName}
+                        patientRoom={notification.patientRoom}
+                        patientStatus={notification.patientStatus as 'urgent' | 'warning' | 'stable'}
                         time={notification.time}
                         onClose={() => handleCloseNotification(notification.id)}
-                        onGo={() => handleGoToPatient(notification.patientId)}
                     />
                 ))}
             </div>
