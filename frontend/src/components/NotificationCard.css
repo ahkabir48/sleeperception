@@ -1,0 +1,58 @@
+/* frontend/src/components/NotificationCard.css */
+.notification-card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.notification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notification-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-icon {
+    color: #007bff;
+}
+
+.close-icon {
+    color: #6c757d;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.close-icon:hover {
+    color: #dc3545;
+}
+
+.notification-time {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.go-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.go-button:hover {
+    background-color: #0056b3;
+}

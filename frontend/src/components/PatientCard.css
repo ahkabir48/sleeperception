@@ -1,0 +1,56 @@
+.patient-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.patient-card:hover {
+    background-color: #d4cfcf;
+}
+
+.patient-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.patient-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.patient-details {
+    display: flex;
+    gap: 1rem;
+    color: #6c757d;
+}
+
+.status-indicator {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.status-critical {
+    background-color: #dc3545;
+}
+
+.status-warning {
+    background-color: #ffc107;
+}
+
+.status-stable {
+    background-color: #28a745;
+}

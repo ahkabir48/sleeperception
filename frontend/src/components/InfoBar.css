@@ -1,0 +1,39 @@
+/* frontend/src/components/InfoBar.css */
+.info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    height: 60px;
+  }
+  
+  .info-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .info-bar-logo {
+    height: 40px;
+    width: auto;
+  }
+  
+  .info-bar-username {
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  
+  .info-bar-logout {
+    padding: 0.5rem 1rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .info-bar-logout:hover {
+    background-color: #c82333;
+  }

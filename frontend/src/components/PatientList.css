@@ -1,0 +1,57 @@
+.patient-cards {
+    border: 32px white solid;
+    border-radius: 40px;
+    padding: 16px;
+    background-color: #babec2;
+}
+
+.patient-cards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.patient-cards-header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.patient-cards-ward-select {
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+}
+
+.patient-cards-add-patient {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.patient-cards-add-patient:hover {
+    background-color: #0056b3;
+}
+
+.patient-cards-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.patient-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+}
+
+.patient-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}

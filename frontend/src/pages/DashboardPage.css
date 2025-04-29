@@ -1,0 +1,24 @@
+/* frontend/src/pages/DashboardPage.css */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.dashboard-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* This will make the notification panel take up 25% width */
+.notification-panel {
+    width: 25%;
+    overflow-y: auto;
+}
+
+/* This will make the patient cards section take up 75% width */
+.patient-cards {
+    width: 75%;
+    overflow-y: auto;
+}
