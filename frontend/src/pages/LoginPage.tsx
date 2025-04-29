@@ -16,7 +16,7 @@ const LoginPage = () => {
         className="login-input"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
+        placeholder="Name"
       />
       <input 
         className="login-input"
