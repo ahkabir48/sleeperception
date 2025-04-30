@@ -1,7 +1,0 @@
-#python dependencies for the backend
-fastapi
-uvicorn[standard]
-sqlalchemy
-psycopg2-binary
-python-multipart # for file uploading
-

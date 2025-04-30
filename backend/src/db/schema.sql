@@ -17,7 +17,7 @@ CREATE TABLE patients (
 -- Patient sleep data table
 CREATE TABLE patient_sleep_data (
     id SERIAL PRIMARY KEY,
-    patient_id VARCHAR(10) REFERENCES patients(id),
+    patient_id VARCHAR(10) REFERENCES patients(id), -- Foreign key referencing patient ids from patients table
     date DATE NOT NULL,
     satisfactory_sleep DECIMAL(4,2) NOT NULL,
     total_sleep DECIMAL(4,2) NOT NULL,

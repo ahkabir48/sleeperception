@@ -9,22 +9,28 @@ const router = Router();
 // Login route
 router.post('/login', async (req: Request, res: Response) => {
     try {
+        console.log('Login attempt received:', req.body);
         const { username, password } = req.body as LoginRequest;
         
         // Get user from database
+        console.log('Querying database for user:', username);
         const result = await query(
             'SELECT * FROM users WHERE username = $1',
             [username]
         );
         
         if (result.rows.length === 0) {
+            console.log('No user found for username:', username);
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
         const user = result.rows[0];
+        console.log('User found:', { id: user.id, username: user.username });
         
         // Verify password
         const isValid = await bcrypt.compare(password, user.password_hash);
+        console.log('Password validation result:', isValid);
+        
         if (!isValid) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
@@ -42,20 +48,22 @@ router.post('/login', async (req: Request, res: Response) => {
             user: userWithoutPassword,
             token
         });
-    } catch (error) {
-        console.error('Login error:', error);
-        res.status(500).json({ error: 'Internal server error' });
+    } catch (error: any) {
+        console.error('Login error details:', error);
+        res.status(500).json({ error: 'Internal server error', details: error?.message || 'Unknown error' });
     }
 });
 
 // Get patient data
 router.get('/patients', async (req, res) => {
     try {
+        console.log('Attempting to fetch patients...');
         const result = await query('SELECT * FROM patients');
+        console.log('Patients query result:', result.rows);
         res.json(result.rows);
-    } catch (error) {
-        console.error('Get patients error:', error);
-        res.status(500).json({ error: 'Internal server error' });
+    } catch (error: any) {
+        console.error('Get patients error details:', error);
+        res.status(500).json({ error: 'Internal server error', details: error?.message || 'Unknown error' });
     }
 });
 

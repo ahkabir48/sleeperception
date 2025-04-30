@@ -6,22 +6,21 @@ import './LoginPage.css';
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [formError, setFormError] = useState('');
     const navigate = useNavigate();
-    const { login } = useAuth();
+    const { login, isLoading, error } = useAuth();
 
     const validateForm = () => {
         if (!username.trim()) {
-            setError('Username is required');
+            setFormError('Username is required');
             return false;
         }
         if (!password) {
-            setError('Password is required');
+            setFormError('Password is required');
             return false;
         }
         if (password.length < 8) {
-            setError('Password must be at least 8 characters');
+            setFormError('Password must be at least 8 characters');
             return false;
         }
         return true;
@@ -29,18 +28,16 @@ const LoginPage = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError('');
+        setFormError('');
 
         if (!validateForm()) return;
 
-        setIsLoading(true);
         try {
             await login(username, password);
             navigate('/dashboard');
         } catch (err) {
-            setError('Invalid username or password');
-        } finally {
-            setIsLoading(false);
+            // Error is already handled by AuthContext
+            // We don't need to do anything here
         }
     };
 
@@ -49,7 +46,11 @@ const LoginPage = () => {
             <div className="login-box">
                 <h2 className="login-title">SleePerception</h2>
                 <img src="/sp_logo.png" alt="Logo" className="login-logo" />
-                {error && <div className="error-message">{error}</div>}
+                {(formError || error) && (
+                    <div className="error-message">
+                        {formError || error}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
