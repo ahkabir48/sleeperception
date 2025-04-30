@@ -49,10 +49,10 @@ jobs:
         cd backend
         npm install
 
-    - name: Run Backend Tests
+    - name: Type Check Backend
       run: |
         cd backend
-        npm run build
+        npx tsc --noEmit
 
     - name: Backend Health Check
       run: |
