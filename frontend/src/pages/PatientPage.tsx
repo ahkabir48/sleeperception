@@ -7,44 +7,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import SleepScore from '../components/SleepScore';
 import DailyList from '../components/DailyList';
+import { patientSleepData } from '../data/patients';
 
 const PatientPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { patientId } = useParams();
     
-    // If no state, redirect back to dashboard
-    if (!location.state) {
+    // If no state or patientId, redirect back to dashboard
+    if (!location.state || !patientId) {
         navigate('/dashboard');
         return null;
     }
 
-    const patientData = location.state;
-
-    // Temporary data for DailyList
-    const dailyEvents = [
-        { 
-            date: "2024-04-29",
-            satisfactorySleep: 6.5,
-            totalSleep: 8
-        },
-        { 
-            date: "2024-04-28",
-            satisfactorySleep: 5,
-            totalSleep: 7
-        },
-        { 
-            date: "2024-04-27",
-            satisfactorySleep: 7,
-            totalSleep: 8.5
-        }
-    ];
+    const patientInfo = location.state;
+    const sleepData = patientSleepData[patientId] || { dailyEvents: [] };
 
     // Calculate average sleep score from (up to) last 7 entries
     const calculateAverageSleepScore = () => {
-        const lastSevenEntries = dailyEvents.slice(0, 7); // Get last 7 entries
+        const lastSevenEntries = sleepData.dailyEvents.slice(0, 7);
         if (lastSevenEntries.length === 0) return 0;
 
-        const totalScore = lastSevenEntries.reduce((sum, entry) => {
+        const totalScore = lastSevenEntries.reduce((sum: number, entry: { satisfactorySleep: number; totalSleep: number }) => {
             const score = (entry.satisfactorySleep / entry.totalSleep) * 100;
             return sum + score;
         }, 0);
@@ -62,10 +46,10 @@ const PatientPage = () => {
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
                 <PatientCard 
-                    name={patientData.name}
-                    patientId={patientData.patientId}
-                    roomNumber={patientData.roomNumber}
-                    status={patientData.status}
+                    name={patientInfo.name}
+                    patientId={patientInfo.patientId}
+                    roomNumber={patientInfo.roomNumber}
+                    status={patientInfo.status}
                 />
             </div>
             <div className="patient-content">
@@ -73,7 +57,7 @@ const PatientPage = () => {
                     <SleepScore score={averageSleepScore} />
                 </div>
                 <div className="right-column">
-                    <DailyList items={dailyEvents} />
+                    <DailyList items={sleepData.dailyEvents} />
                 </div>
             </div>
         </div>
