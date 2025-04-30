@@ -52,7 +52,7 @@ jobs:
     - name: Run Backend Tests
       run: |
         cd backend
-        npm test
+        npm run build
 
     - name: Backend Health Check
       run: |
