@@ -44,16 +44,17 @@ jobs:
         npm run build
 
     # Backend setup
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-
     - name: Install Backend Dependencies
       run: |
         cd backend
-        pip install -r requirements.txt
+        npm install
+
+    - name: Run Backend Tests
+      run: |
+        cd backend
+        npm test
 
     - name: Backend Health Check
       run: |
         echo "Backend build OK!"
+
