@@ -41,7 +41,7 @@ const LoginPage = () => {
         }
     };
 
-    return (
+  return (
         <div className="login-container">
             <div className="login-box">
                 <h2 className="login-title">SleePerception</h2>
@@ -49,28 +49,28 @@ const LoginPage = () => {
                 {(formError || error) && (
                     <div className="error-message">
                         {formError || error}
-                    </div>
+      </div>
                 )}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
-                        <input
+      <input 
                             type="text"
                             id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
                             disabled={isLoading}
-                        />
+      />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input
+      <input 
                             type="password"
                             id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
                             disabled={isLoading}
-                        />
+      />
                     </div>
                     <button 
                         type="submit" 
@@ -81,8 +81,8 @@ const LoginPage = () => {
                     </button>
                 </form>
             </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default LoginPage; 

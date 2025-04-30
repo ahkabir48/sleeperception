@@ -14,7 +14,7 @@ const DailyList: React.FC<DailyListProps> = ({ items }) => {
     return (
         <div className="daily-list">
             <h2>Sleep Log</h2>
-            <div className="daily-list-container">
+        <div className="daily-list-container">
                 {items.map((item, index) => (
                     <DailyLog
                         key={index}
