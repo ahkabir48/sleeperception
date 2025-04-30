@@ -1,0 +1,66 @@
+.daily-log {
+    background-color: rgb(184, 184, 184);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    display: inline-block;
+    width: fit-content;
+}
+
+.log-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.log-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.sleep-score-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 150px;
+}
+
+.sleep-score-bar {
+    flex: 1;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.sleep-score-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.sleep-score-value {
+    font-weight: bold;
+    min-width: 40px;
+    text-align: right;
+}
+
+.log-details {
+    display: flex;
+    gap: 2rem;
+}
+
+.sleep-metric {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.metric-value {
+    font-weight: bold;
+    color: #333;
+}

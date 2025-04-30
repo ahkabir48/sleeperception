@@ -20,6 +20,40 @@ const PatientPage = () => {
 
     const patientData = location.state;
 
+    // Temporary data for DailyList
+    const dailyEvents = [
+        { 
+            date: "2024-04-29",
+            satisfactorySleep: 6.5,
+            totalSleep: 8
+        },
+        { 
+            date: "2024-04-28",
+            satisfactorySleep: 5,
+            totalSleep: 7
+        },
+        { 
+            date: "2024-04-27",
+            satisfactorySleep: 7,
+            totalSleep: 8.5
+        }
+    ];
+
+    // Calculate average sleep score from (up to) last 7 entries
+    const calculateAverageSleepScore = () => {
+        const lastSevenEntries = dailyEvents.slice(0, 7); // Get last 7 entries
+        if (lastSevenEntries.length === 0) return 0;
+
+        const totalScore = lastSevenEntries.reduce((sum, entry) => {
+            const score = (entry.satisfactorySleep / entry.totalSleep) * 100;
+            return sum + score;
+        }, 0);
+
+        return Math.round(totalScore / lastSevenEntries.length);
+    };
+
+    const averageSleepScore = calculateAverageSleepScore();
+
     return (
         <div className="patient-page">
             <InfoBar />
@@ -35,8 +69,12 @@ const PatientPage = () => {
                 />
             </div>
             <div className="patient-content">
-                <SleepScore />
-                <DailyList />
+                <div className="left-column">
+                    <SleepScore score={averageSleepScore} />
+                </div>
+                <div className="right-column">
+                    <DailyList items={dailyEvents} />
+                </div>
             </div>
         </div>
     );

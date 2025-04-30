@@ -40,3 +40,23 @@
     border-radius: 10px;
     border: 1px solid #0b0b0b;
 }
+
+.patient-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.left-column {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 2rem;
+    border-right: 1px solid #dee2e6;
+}
+
+.right-column {
+    width: 55%;
+    overflow-y: auto;
+}
