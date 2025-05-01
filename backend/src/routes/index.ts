@@ -1,8 +1,9 @@
 import express, { Request, Response, Router } from 'express';
 import { query } from '../db';
+import pool from '../db';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { LoginRequest, LoginResponse } from '../types';
+import { LoginRequest, LoginResponse, CreatePatientRequest } from '../types';
 
 const router = Router();
 
@@ -94,5 +95,123 @@ router.get('/notifications', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+// Create new patient
+router.post('/patients', async (req: Request, res: Response) => {
+    try {
+        const { name, room_number } = req.body as CreatePatientRequest;
+        
+        // Validate input
+        if (!name || !room_number) {
+            return res.status(400).json({ error: 'Name and room number are required' });
+        }
+
+        // Generate unique 5-character ID and verify it doesn't exist
+        let id = '';
+        let isUnique = false;
+        let attempts = 0;
+        const maxAttempts = 10; // Prevent infinite loop
+
+        while (!isUnique && attempts < maxAttempts) {
+            // Generate 5-character ID (uppercase letters and numbers)
+            id = Math.random().toString(36).substring(2, 7).toUpperCase();
+            
+            // Check if ID exists
+            const existingPatient = await query(
+                'SELECT id FROM patients WHERE id = $1',
+                [id]
+            );
+            
+            if (existingPatient.rows.length === 0) {
+                isUnique = true;
+            }
+            
+            attempts++;
+        }
+
+        if (!isUnique) {
+            return res.status(500).json({ error: 'Failed to generate unique ID' });
+        }
+
+        // Insert into database
+        const result = await query(
+            'INSERT INTO patients (id, name, room_number) VALUES ($1, $2, $3) RETURNING *',
+            [id, name, room_number]
+        );
+
+        res.status(201).json(result.rows[0]);
+    } catch (error: any) {
+        console.error('Create patient error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Delete a patient and their sleep data
+router.delete('/patients/:id', async (req, res) => {
+    const client = await pool.connect();
+    try {
+        const { id } = req.params;
+        console.log('Received delete request for patient ID:', id);
+        
+        // Start a transaction
+        await client.query('BEGIN');
+        console.log('Transaction started');
+
+        // First delete sleep data
+        const sleepDeleteResult = await client.query(
+            'DELETE FROM patient_sleep_data WHERE patient_id = $1 RETURNING *',
+            [id]
+        );
+        console.log('Deleted sleep data rows:', sleepDeleteResult.rowCount);
+
+        // Then delete the patient
+        const patientDeleteResult = await client.query(
+            'DELETE FROM patients WHERE id = $1 RETURNING *',
+            [id]
+        );
+        console.log('Deleted patient rows:', patientDeleteResult.rowCount);
+
+        if (patientDeleteResult.rows.length === 0) {
+            console.log('No patient found with ID:', id);
+            await client.query('ROLLBACK');
+            return res.status(404).json({ error: 'Patient not found' });
+        }
+
+        // Commit the transaction
+        await client.query('COMMIT');
+        console.log('Transaction committed successfully');
+
+        res.json({ 
+            message: 'Patient and associated sleep data deleted successfully',
+            deletedPatient: patientDeleteResult.rows[0],
+            deletedSleepDataCount: sleepDeleteResult.rowCount
+        });
+    } catch (error) {
+        // Rollback the transaction on error
+        console.error('Error in delete operation:', error);
+        await client.query('ROLLBACK');
+        console.log('Transaction rolled back due to error');
+        res.status(500).json({ error: 'Failed to delete patient' });
+    } finally {
+        client.release();
+        console.log('Database client released');
+    }
+});
+
+// Delete a notification
+router.delete('/notifications/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await query(
+            'DELETE FROM notifications WHERE id = $1 RETURNING *',
+            [id]
+        );
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error deleting notification:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 export default router; 

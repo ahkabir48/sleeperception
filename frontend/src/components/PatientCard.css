@@ -1,46 +1,69 @@
 .patient-card {
     background-color: white;
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     cursor: pointer;
+    transition: transform 0.2s;
 }
 
 .patient-card:hover {
-    background-color: #d4cfcf;
+    transform: translateY(-2px);
 }
 
 .patient-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    flex: 1;
 }
 
 .patient-name {
-    font-size: 1.2rem;
-    font-weight: bold;
     margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .patient-details {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.patient-details span {
+    margin-right: 1rem;
+}
+
+.patient-actions {
     display: flex;
+    align-items: center;
     gap: 1rem;
-    color: #6c757d;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+    background-color: rgba(220, 53, 69, 0.1);
 }
 
 .status-indicator {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
     font-weight: bold;
+    color: white;
 }
 
 .status-critical {

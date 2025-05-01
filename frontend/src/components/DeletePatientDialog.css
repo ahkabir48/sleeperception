@@ -1,0 +1,75 @@
+.delete-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.delete-dialog-container {
+    position: relative;
+    z-index: 60;
+}
+
+.delete-dialog-panel {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 400px;
+    max-width: 90vw;
+}
+
+.delete-dialog-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #dc3545;
+}
+
+.delete-dialog-content {
+    margin-bottom: 1.5rem;
+}
+
+.delete-dialog-warning {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.delete-dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.delete-dialog-cancel,
+.delete-dialog-confirm {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: none;
+}
+
+.delete-dialog-cancel {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.delete-dialog-cancel:hover {
+    background-color: #e9ecef;
+}
+
+.delete-dialog-confirm {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-dialog-confirm:hover {
+    background-color: #c82333;
+} 

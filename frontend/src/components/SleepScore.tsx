@@ -10,12 +10,14 @@ const SleepScore: React.FC<SleepScoreProps> = ({ score }) => {
     const getScoreColor = (score: number) => {
         if (score >= 75) return '#28a745'; // Green
         if (score >= 50) return '#ffc107'; // Yellow
+        if (score == 0) return '#e9ecef'; // Grey - no data
         return '#dc3545'; // Red
     };
 
     const getScoreGrade = (score: number) => {
         if (score >= 75) return 'A';
         if (score >= 50) return 'B';
+        if (score == 0) return 'No Data';
         return 'C';
     };
 
