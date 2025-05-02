@@ -1,6 +1,6 @@
 # SleePerception
 
-Patient dashboard for nurses in LTCs to keep track of their patients' sleep patterns and get notified of any inconsistencies in order to administer the proper care, before the onset of delirium or other care facility induced conditions.
+Patient dashboard for nurses in LTCs to keep track of their patients' sleep patterns and get notified of any inconsistencies in order to administer the proper care, before the onset of delirium or other care facility induced conditions. Spunout from Velocity Health Innovation Challenge.
 
 ## Current Capabilities
 - Simple login and authentication
